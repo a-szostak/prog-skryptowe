@@ -1,8 +1,7 @@
 #!/bin/bash env python3
 
-slownik = {}
+from typy import slownik
 
-znaki = input()
 
 def zapisz(znaki):
     for i in "0123456789":
@@ -17,7 +16,3 @@ def wypisz():
         if i != list(slownik.keys())[-1]:
             wyjscie = wyjscie + ", "
     print(wyjscie)
-
-
-#zapisz(znaki)
-#wypisz()
