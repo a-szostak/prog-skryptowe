@@ -16,23 +16,17 @@ class Day(Enum):
 
     def difference(self, day):
         if self.value > day.value:
-            wynik1 = self.value - day.value
-            wynik2 = (self.value + day.value) % 7 * 
-
-            if wynik1 < wynik2:
-                return wynik1
-            else:
-                return wynik2
+            wynik = -(self.value - day.value)
+            if math.fabs(wynik) > 3:
+                wynik = (self.value + day.value) % 7
 
         else:
-            wynik1 = day.value - self.value
-            wynik2 = (self.value + day.value) % 7 * -1
-            if math.fabs(wynik1) < math.fabs(wynik2):
-                return wynik1
-            else:
-                return wynik2
+            wynik = day.value - self.value
+            if math.fabs(wynik) > 3:
+                wynik = (self.value + day.value) % 7 * (-1)
 
-        #return wynik
+
+        return wynik
 
 
 def nthDayFrom(n, day):
