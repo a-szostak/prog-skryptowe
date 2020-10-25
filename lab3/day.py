@@ -15,16 +15,12 @@ class Day(Enum):
 
 
     def difference(self, day):
-        if self.value > day.value:
-            wynik = -(self.value - day.value)
-            if math.fabs(wynik) > 3:
-                wynik = (self.value + day.value) % 7
+        wynik = day.value - self.value
 
-        else:
-            wynik = day.value - self.value
-            if math.fabs(wynik) > 3:
-                wynik = (self.value + day.value) % 7 * (-1)
-
+        if wynik > 3:
+            wynik = wynik - 7
+        elif wynik < -3:
+            wynik = wynik + 7
 
         return wynik
 
