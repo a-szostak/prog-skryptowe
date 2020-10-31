@@ -4,7 +4,7 @@ from day import Day
 
 class Term:
 
-    def __init__(self, hour, minute, duration = 90, day = None):
+    def __init__(self, hour, minute, duration= 90, day = None):
         self.duration  = duration
         self.minute = minute
         self.hour = hour

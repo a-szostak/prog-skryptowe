@@ -26,33 +26,33 @@ class Lesson():
     def earlierDay(self):
         if check_full_time(self.term) == True and self.term.day.value != 1:
             new_day = self.term.day.value - 1
-            new_term = Term(self.term.hour, self.term.minute, day = Day(new_day))
-            print(new_term.day)
+            self.term= Term(self.term.hour, self.term.minute, day = Day(new_day))
+
 
         elif check_full_time(self.term) == False and self.term.day.value != 5:
             new_day = self.term.day.value - 1
-            new_term = Term(self.term.hour, self.term.minute, day = Day(new_day))
-            print(new_term.day)
+            self.term = Term(self.term.hour, self.term.minute, day = Day(new_day))
+            
 
         else:
             return False
 
-        return new_term
+        return self.term
 
     def laterDay(self):
         if check_full_time(self.term) == True and self.term.day.value != 5:
             new_day = self.term.day.value + 1
-            new_term = Term(self.term.hour, self.term.minute, day = Day(new_day))
+            self.term = Term(self.term.hour, self.term.minute, day = Day(new_day))
 
 
         elif check_full_time(self.term) == False and self.term.day.value != 7:
             new_day = self.term.day.value + 1
-            new_term = Term(self.term.hour, self.term.minute, day = Day(new_day))
+            self.term = Term(self.term.hour, self.term.minute, day = Day(new_day))
 
         else:
             return False
 
-        return new_term
+        return self.term
 
 
     def earlierTime(self):
@@ -60,10 +60,10 @@ class Lesson():
         new_hour = (min - self.term.duration) // 60
         new_min = (min - self.term.duration) % 60
 
-        new_term = Term(new_hour, new_min, day = self.term.day)
+        self.term = Term(new_hour, new_min, day = self.term.day)
 
-        if check_full_time(new_term) != None:
-            return new_term
+        if check_full_time(self.term) != None:
+            return self.term
         else:
             return False
 
@@ -72,10 +72,10 @@ class Lesson():
         new_hour = (self.term.duration + min) // 60
         new_min = (self.term.duration + min) % 60
 
-        new_term = Term(new_hour, new_min, day = self.term.day)
+        self.term = Term(new_hour, new_min, day = self.term.day)
 
-        if check_full_time(new_term) != None:
-            return new_term
+        if check_full_time(self.term) != None:
+            return self.term
         else:
             return False
 
