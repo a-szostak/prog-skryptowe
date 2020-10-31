@@ -2,6 +2,7 @@
 from term import Term
 from day import Day
 
+
 def check_full_time(term: Term):
 
     if term.day.value in [1,2,3,4] and (term.hour >= 8 and term.hour < 20):
@@ -17,11 +18,53 @@ def check_full_time(term: Term):
 
 class Lesson():
     def __init__(self, term: Term, name: str, teacherName: str, year: int):
-        self.term = term
-        self.name = name
-        self.teacherName = teacherName
-        self.year = year
-        self.full_time = check_full_time(term)
+        self.__term = term
+        self.__name = name
+        self.__teacherName = teacherName
+        self.__year = year
+        self.__full_time = check_full_time(term)
+
+    @property
+    def term(self):
+        return self.__term
+
+    @term.setter
+    def term(self, var):
+        self.__term = var
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, var):
+        self.__name = var
+
+    @property
+    def teacherName(self):
+        return self.__teacherName
+
+    @teacherName.setter
+    def teacherName(self, var):
+        self.__teacherName = var
+
+    @property
+    def year(self):
+        return self.__year
+
+    @year.setter
+    def year(self,var):
+        self.__year = var
+
+    @property
+    def full_time(self):
+        return self.__full_time
+
+    @full_time.setter
+    def full_time(self, var):
+        self.__full_time = var
+
+
 
     def earlierDay(self):
         if check_full_time(self.term) == True and self.term.day.value != 1:
@@ -32,7 +75,7 @@ class Lesson():
         elif check_full_time(self.term) == False and self.term.day.value != 5:
             new_day = self.term.day.value - 1
             self.term = Term(self.term.hour, self.term.minute, day = Day(new_day))
-            
+
 
         else:
             return False
