@@ -1,6 +1,7 @@
 #!/bin/bash env python3
 
 class Klasa(object):
+
     tab = [1,2,3]
 
     def __init__(self, tab, _zmienna1, __zmienna2):

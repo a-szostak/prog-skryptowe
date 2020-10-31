@@ -1,9 +1,8 @@
 
-import re
 from day import Day
 
 class Term:
-    
+
     def __init__(self, day, hour, minute, duration = 90):
         self.duration  = duration
         self.minute = minute
