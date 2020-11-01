@@ -5,8 +5,8 @@ from day import Day
 from lesson import Lesson
 from action import Action
 
-lesson1 = Lesson(Timetable1, Term(12, 15, day = Day.THU), "Programowanie skryptowe", "Polak", 2)
-lesson2 = Lesson(Timetable1, Term(8, 20, day = Day.THU), "Systemy operacyjne", "Rzecki", 2)
+lesson1 = Lesson(Timetable1, Term(12, 15, day = Day.THU), "Programowanie", "Polak", 2)
+lesson2 = Lesson(Timetable1, Term(8, 20, day = Day.THU), "SysOps", "Rzecki", 2)
 lesson3 = Lesson(Timetable1, Term(17, 20, day = Day.FRI), "Kryptografia", "Topa", 2)
 
 table = Timetable1()
@@ -32,13 +32,14 @@ class TestTimetable1(unittest.TestCase):
 
         self.assertEqual(table.put(to_add1), True)
         self.assertEqual(table.put(to_add2), False)
+        
 
     def test_parse(self):
         self.assertEqual(table.parse(["d-", "aaaaa", "d+", "eeeeeeee", "t-", "t+"]),[Action.DAY_EARLIER, Action.DAY_LATER, Action.TIME_EARLIER, Action.TIME_LATER])
 
 
     def test_perform(self):
-        first = Lesson(Timetable1, Term(15, 45, day = Day.THU), "Rosyjski", "Jawor", 2)
+        first = Lesson(Timetable1, Term(13, 45, day = Day.THU), "Rosyjski", "Jawor", 2)
         second = Lesson(Timetable1, Term(18, 10, day = Day.WED), "Rosyjski", "Jawor", 2)
         new = Timetable1()
         new.lessons = [first, second]
@@ -47,7 +48,7 @@ class TestTimetable1(unittest.TestCase):
         new.perform(actions)
 
         self.assertEqual(first.term.day.value, 5)
-        self.assertEqual(first.term.hour, 17)
+        self.assertEqual(first.term.hour, 15)
         self.assertEqual(first.term.minute, 15)
         self.assertEqual(second.term.day.value, 2)
         self.assertEqual(second.term.hour, 16)
@@ -58,7 +59,7 @@ class TestTimetable1(unittest.TestCase):
         new.perform(actions2)
 
         self.assertEqual(second.term.day.value, 1)
-        self.assertEqual(first.term.hour, 17)
+        self.assertEqual(first.term.hour, 15)
         self.assertEqual(first.term.minute, 15)
 
     def test_get(self):

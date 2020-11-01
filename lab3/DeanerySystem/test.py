@@ -1,5 +1,5 @@
 import unittest, term
-from term import Term
+from term import Term, Diff
 from day import Day
 
 term1 = Term(Day.TUE, 9, 45)
@@ -28,7 +28,7 @@ class TestTerm(unittest.TestCase):
         self.assertEqual(diff.seconds, 88_200)
         self.assertEqual(diff.minutes, 1_470)
         self.assertEqual(diff.hours, 24) #wartosc zaokraglona w dol
-        self.assertEqual(diff.days, 88_200)
+        self.assertEqual(diff.days, 1)
 
 if __name__ == '__main__':
     unittest.main()

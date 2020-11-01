@@ -72,31 +72,39 @@ class Lesson():
     def earlierDay(self):
         if check_full_time(self.term) == True and self.term.day.value != 1:
             new_day = self.term.day.value - 1
-            self.term= Term(self.term.hour, self.term.minute, day = Day(new_day))
+            new_term = Term(self.term.hour, self.term.minute, day = Day(new_day))
+
 
 
         elif check_full_time(self.term) == False and self.term.day.value != 5:
             new_day = self.term.day.value - 1
-            self.term = Term(self.term.hour, self.term.minute, day = Day(new_day))
+            new_term = Term(self.term.hour, self.term.minute, day = Day(new_day))
+
 
 
         else:
             return False
+
+        if self.timetable().can_be_transferred_to(new_term, self.full_time) == True:
+            self.term = new_term
 
         return self.term
 
     def laterDay(self):
         if check_full_time(self.term) == True and self.term.day.value != 5:
             new_day = self.term.day.value + 1
-            self.term = Term(self.term.hour, self.term.minute, day = Day(new_day))
+            new_term = Term(self.term.hour, self.term.minute, day = Day(new_day))
 
 
         elif check_full_time(self.term) == False and self.term.day.value != 7:
             new_day = self.term.day.value + 1
-            self.term = Term(self.term.hour, self.term.minute, day = Day(new_day))
+            new_term = Term(self.term.hour, self.term.minute, day = Day(new_day))
 
         else:
             return False
+
+        if self.timetable().can_be_transferred_to(new_term, self.full_time) == True:
+            self.term = new_term
 
         return self.term
 
@@ -106,10 +114,14 @@ class Lesson():
         new_hour = (min - self.term.duration) // 60
         new_min = (min - self.term.duration) % 60
 
-        self.term = Term(new_hour, new_min, day = self.term.day)
+        new_term = Term(new_hour, new_min, day = self.term.day)
 
-        if check_full_time(self.term) != None:
+
+        if self.timetable().can_be_transferred_to(new_term, self.full_time) == True:
+            self.term = new_term
+
             return self.term
+
         else:
             return False
 
@@ -118,10 +130,14 @@ class Lesson():
         new_hour = (self.term.duration + min) // 60
         new_min = (self.term.duration + min) % 60
 
-        self.term = Term(new_hour, new_min, day = self.term.day)
+        new_term = Term(new_hour, new_min, day = self.term.day)
 
-        if check_full_time(self.term) != None:
+
+        if self.timetable().can_be_transferred_to(new_term, self.full_time) == True:
+            self.term = new_term
+
             return self.term
+
         else:
             return False
 
