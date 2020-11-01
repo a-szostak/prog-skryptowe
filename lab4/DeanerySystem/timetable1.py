@@ -1,8 +1,9 @@
 from typing import List
 from term import Term
-from lesson import Lesson
+from lesson2 import Lesson
 from action import Action
 from day import Day
+import math
 
 class Timetable1:
     """ Class containing a set of operations to manage the timetable """
@@ -180,6 +181,41 @@ lesson: Lesson
             if lesson.term == term:
                 return lesson
         return None
+
+
+    def __str__(self):
+        print(" " * 12, "*Poniedziałek*Wtorek     *Środa      *Czwartek    *Piątek      *Sobota    *Niedziela")
+        print(" " * 12, "*" * 84)
+        godziny = {
+        "8": "8:00-8:30",
+        "9": "9:30-11:00",
+        "11": "11:00-12:30",
+        "12": "12:30-14:00",
+        "14": "14:00-15:30",
+        "15": "15:30-17:00",
+        "17": "17:00-18:30",
+        "18": "18:30-20:00"}
+
+        for i in godziny:
+
+
+            #print(" " * 12, "*" * 84)
+            print(" "*12)
+            wiersz = [" "*13, "*", " "*12 , "*" , " "*11 , "*" , " "*11 , "*" , " "*12 , "*" , " "*12 , "*" , " "*10 , "*"]
+            #print("             *           *              *           *         *        *")
+            for lesson in self.lessons:
+
+                if lesson.term.hour == int(i):
+                    index = 2 * lesson.term.day.value
+                    #len(wiersz[index])
+                    wiersz[index] = lesson.name + " "*(len(wiersz[index]) - len(lesson.name))
+            print("".join(wiersz))
+            print (godziny[i])
+            print(" " * 12, "*" * 84)
+
+        return ""
+
+
 
 def check_full_time(term: Term):
 

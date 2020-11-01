@@ -1,7 +1,7 @@
 
 from term import Term
 from day import Day
-from timetable1 import Timetable1
+
 
 
 def check_full_time(term: Term):
@@ -18,7 +18,7 @@ def check_full_time(term: Term):
 
 
 class Lesson():
-    def __init__(self, timetable: Timetable1, term: Term, name: str, teacherName: str, year: int):
+    def __init__(self, timetable, term: Term, name: str, teacherName: str, year: int):
 
         self.__term = term
         self.__name = name

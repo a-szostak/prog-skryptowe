@@ -5,9 +5,9 @@ from day import Day
 from lesson import Lesson
 from action import Action
 
-lesson1 = Lesson(Term(12, 15, day = Day.THU), "Programowanie skryptowe", "Polak", 2)
-lesson2 = Lesson(Term(8, 20, day = Day.THU), "Systemy operacyjne", "Rzecki", 2)
-lesson3 = Lesson(Term(17, 20, day = Day.FRI), "Kryptografia", "Topa", 2)
+lesson1 = Lesson(Timetable1, Term(12, 15, day = Day.THU), "Programowanie skryptowe", "Polak", 2)
+lesson2 = Lesson(Timetable1, Term(8, 20, day = Day.THU), "Systemy operacyjne", "Rzecki", 2)
+lesson3 = Lesson(Timetable1, Term(17, 20, day = Day.FRI), "Kryptografia", "Topa", 2)
 
 table = Timetable1()
 table.lessons = [lesson1, lesson2, lesson3]
@@ -27,8 +27,8 @@ class TestTimetable1(unittest.TestCase):
 
 
     def test_put(self):
-        to_add1 = Lesson(Term(15, 45, day = Day.THU), "Rosyjski", "Jawor", 2)
-        to_add2 = Lesson(Term(18, 10, day = Day.FRI), "Rosyjski", "Jawor", 2)
+        to_add1 = Lesson(Timetable1, Term(15, 45, day = Day.THU), "Rosyjski", "Jawor", 2)
+        to_add2 = Lesson(Timetable1, Term(18, 10, day = Day.FRI), "Rosyjski", "Jawor", 2)
 
         self.assertEqual(table.put(to_add1), True)
         self.assertEqual(table.put(to_add2), False)
@@ -38,8 +38,8 @@ class TestTimetable1(unittest.TestCase):
 
 
     def test_perform(self):
-        first = Lesson(Term(15, 45, day = Day.THU), "Rosyjski", "Jawor", 2)
-        second = Lesson(Term(18, 10, day = Day.WED), "Rosyjski", "Jawor", 2)
+        first = Lesson(Timetable1, Term(15, 45, day = Day.THU), "Rosyjski", "Jawor", 2)
+        second = Lesson(Timetable1, Term(18, 10, day = Day.WED), "Rosyjski", "Jawor", 2)
         new = Timetable1()
         new.lessons = [first, second]
 
