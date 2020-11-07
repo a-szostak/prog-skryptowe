@@ -20,7 +20,7 @@ def check_full_time(term: Term):
 
 
 class Lesson():
-    def __init__(self, timetable: Timetable1, term: Term, name: str, teacherName: str, year: int, skipBreaks: bool = True):
+    def __init__(self, timetable, term: Term, name: str, teacherName: str, year: int, skipBreaks: bool = True):
 
         self.__term = term
         self.__name = name
@@ -29,6 +29,7 @@ class Lesson():
         self.__full_time = check_full_time(term)
         self.timetable = timetable
         self.skipBreaks = skipBreaks
+
 
     @property
     def term(self):
@@ -113,40 +114,52 @@ class Lesson():
 
 
     def earlierTime(self):
-        if self.skipBreaks and which_break(self):
+        if self.skipBreaks == True:
 
+            min = self.term.hour * 60 + self.term.minute
+            new_hour = (min - self.term.duration - self.breakBefore) // 60
+            new_min = (min - self.term.duration - self.breakBefore) % 60
+
+            new_term = Term(new_hour, new_min, day = self.term.day)
+
+        else:
             min = self.term.hour * 60 + self.term.minute
             new_hour = (min - self.term.duration) // 60
             new_min = (min - self.term.duration) % 60
 
             new_term = Term(new_hour, new_min, day = self.term.day)
 
+        if self.timetable().can_be_transferred_to(new_term, self.full_time) == True:
+            self.term = new_term
 
-            if self.timetable().can_be_transferred_to(new_term, self.full_time) == True:
-                self.term = new_term
+            return self.term
 
-                return self.term
-
-            else:
-                return False
+        else:
+            return False
 
     def laterTime(self):
-        if not self.skipBreaks and not which_break(self):
+        if self.skipBreaks == True:
 
             min = self.term.hour * 60 + self.term.minute
-            new_hour = (self.term.duration + min) // 60
+            new_hour = (self.term.duration + min + self.breakAfter) // 60
+            new_min = (self.term.duration + min + self.breakAfter) % 60
+
+            new_term = Term(new_hour, new_min, day = self.term.day)
+
+        else:
+            min = self.term.hour * 60 + self.term.minute
+            new_hour = (self.term.duration + min ) // 60
             new_min = (self.term.duration + min) % 60
 
             new_term = Term(new_hour, new_min, day = self.term.day)
 
+        if self.timetable().can_be_transferred_to(new_term, self.full_time) == True:
+            self.term = new_term
 
-            if self.timetable().can_be_transferred_to(new_term, self.full_time) == True:
-                self.term = new_term
+            return self.term
 
-                return self.term
-
-            else:
-                return False
+        else:
+            return False
 
 
     def __str__(self):

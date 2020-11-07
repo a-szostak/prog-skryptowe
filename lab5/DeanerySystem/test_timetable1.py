@@ -32,7 +32,7 @@ class TestTimetable1(unittest.TestCase):
 
         self.assertEqual(table.put(to_add1), True)
         self.assertEqual(table.put(to_add2), False)
-        
+
 
     def test_parse(self):
         self.assertEqual(table.parse(["d-", "aaaaa", "d+", "eeeeeeee", "t-", "t+"]),[Action.DAY_EARLIER, Action.DAY_LATER, Action.TIME_EARLIER, Action.TIME_LATER])

@@ -1,4 +1,5 @@
 from term import Term
+from day import Day
 from typing import List
 from lesson2 import Lesson
 from b import Break
@@ -6,11 +7,14 @@ from action import Action
 
 class Timetable2:
 
-    '''def __init__(self, breaks: List[Break]):
-        self.breaks = breaks'''
+    def __init__(self, breaks: List[Break] = None):
+        self.breaks = breaks
+        self.lessons = []
 
-    def __init__(self):
+    '''def __init__(self):
         self.breaks = [Break(Term(9, 30, 5)), Break(Term(11, 5, 10))]
+        self.lessons = []'''
+
 
 
 
@@ -19,13 +23,16 @@ class Timetable2:
             lesson_end = lesson.term.hour * 60 + lesson.term.minute + lesson.term.duration
             break_start = b.term.hour *60 + b.term.minute
             if b.end_hr == lesson.term.hour and b.end_min == lesson.term.minute:
-                lesson.term.duration += b.term.duration
-                return True
+                setattr(lesson, 'breakBefore', b.term.duration)
+                #lesson.breakBefore = b.term.duration
             elif lesson_end == break_start:
-                lesson.term.duration += b.term.duration
-                return False
-            else:
-                return None
+                setattr(lesson, 'breakAfter', b.term.duration)
+                lesson.breakAfter = b.term.duration
+
+
+    def att_setter(self):
+        for lesson in self.lessons:
+            self.which_break(lesson)
 
 
 
@@ -71,6 +78,7 @@ class Timetable2:
     def put(self, lesson: Lesson) -> bool:
         if self.can_be_transferred_to(lesson.term, lesson.full_time) == True:
             self.lessons.append(lesson)
+            self.att_setter()
             return True
         return False
 
@@ -93,7 +101,7 @@ class Timetable2:
 
     def perform(self, actions: List[Action]):
         number = 0
-
+        self.att_setter()
         for action in actions:
             if action == Action.DAY_EARLIER:
                 self.lessons[number].earlierDay()
@@ -105,6 +113,7 @@ class Timetable2:
                 self.lessons[number].laterTime()
             number = (number + 1) % len(self.lessons)
 
+            self.att_setter()
 
     def get(self, term: Term) -> Lesson:
         for lesson in self.lessons:
@@ -117,15 +126,24 @@ class Timetable2:
         print(" " * 12, "*Poniedziałek*Wtorek     *Środa      *Czwartek    *Piątek      *Sobota    *Niedziela")
         print(" " * 12, "*" * 84)
         godziny = {
-        "8": "8:00-8:30",
-        "9": "9:30-11:00",
-        "11": "11:00-12:30",
-        "12": "12:30-14:00",
-        "14": "14:00-15:30",
-        "15": "15:30-17:00",
-        "17": "17:00-18:30",
-        "18": "18:30-20:00"}
+        "8": "8:00-9:30",
+        "9": "9:35-11:05",
+        "11": "11:15-12:45",
+        "12": "12:50-14:20",
+        "14": "14:40-16:10",
+        "15": "16:15-17:45",
+        "17": "17:50-19:20",
+        }
 
+        przerwy = [
+        "9:30-9:35",
+        "11:05-11:15",
+        "12:45-12:50",
+        "14:20-14:40",
+        "16:10-16:15",
+        "17:45-17:50"
+        ]
+        j = 0
         for i in godziny:
 
 
@@ -140,7 +158,10 @@ class Timetable2:
                     #len(wiersz[index])
                     wiersz[index] = lesson.name + " "*(len(wiersz[index]) - len(lesson.name))
             print("".join(wiersz))
-            print (godziny[i])
+            print (godziny[i] + "\n\n")
+            print(przerwy[j] + "  " + "-"*84 + "\n")
+            if j < 5:
+                j += 1
             print(" " * 12, "*" * 84)
 
         return ""
