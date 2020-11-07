@@ -2,7 +2,7 @@
 from term import Term
 from day import Day
 from b import Break
-
+from basic import BasicTerm
 
 def check_full_time(term: Term):
 
@@ -18,7 +18,7 @@ def check_full_time(term: Term):
 
 
 class Lesson():
-    def __init__(self, timetable, term: Term, name: str, teacherName: str, year: int, skipBreaks: bool = True):
+    def __init__(self, timetable, term: Term, name: str, teacherName: str, year: int, skipBreaks: bool = None):
 
         self.__term = term
         self.__name = name
@@ -71,7 +71,7 @@ class Lesson():
 
 
     def earlierDay(self):
-        
+
         if check_full_time(self.term) == True and self.term.day.value != 1:
             new_day = self.term.day.value - 1
             new_term = Term(self.term.hour, self.term.minute, day = Day(new_day))
@@ -112,7 +112,7 @@ class Lesson():
 
 
     def earlierTime(self):
-        if self.skipBreaks == True:
+        if self.skipBreaks == True and str(self.timetable) == Timetable2:
 
             min = self.term.hour * 60 + self.term.minute
             new_hour = (min - self.term.duration - self.breakBefore) // 60
@@ -120,7 +120,7 @@ class Lesson():
 
             new_term = Term(new_hour, new_min, day = self.term.day)
 
-        else:
+        elif self.skipBreaks == False or self.timetable == Timetable1:
             min = self.term.hour * 60 + self.term.minute
             new_hour = (min - self.term.duration) // 60
             new_min = (min - self.term.duration) % 60
@@ -136,7 +136,7 @@ class Lesson():
             return False
 
     def laterTime(self):
-        if self.skipBreaks == True:
+        if self.skipBreaks == True and self.timetable == Timetable2:
 
             min = self.term.hour * 60 + self.term.minute
             new_hour = (self.term.duration + min + self.breakAfter) // 60
@@ -144,7 +144,7 @@ class Lesson():
 
             new_term = Term(new_hour, new_min, day = self.term.day)
 
-        else:
+        elif self.skipBreaks == False or self.timetable == Timetable1:
             min = self.term.hour * 60 + self.term.minute
             new_hour = (self.term.duration + min ) // 60
             new_min = (self.term.duration + min) % 60

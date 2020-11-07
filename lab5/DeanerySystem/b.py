@@ -1,8 +1,9 @@
 from term import Term
+from basic import BasicTerm
 
 class Break():
 
-    def __init__(self, term: Term):
+    def __init__(self, term: BasicTerm):
         self.term = term
 
         self.end = self.term.hour *60 + self.term.minute + self.term.duration

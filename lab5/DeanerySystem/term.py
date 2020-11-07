@@ -1,18 +1,20 @@
 
 import math
 from day import Day
+from basic import BasicTerm
 
-class Term:
+class Term(BasicTerm):
 
     def __init__(self, hour, minute, duration = 90, day = None):
-        self.__duration  = duration
+        super().__init__(hour, minute, duration)
+        '''self.__duration  = duration
         self.__minute = minute
-        self.__hour = hour
+        self.__hour = hour'''
         self.__day = day
 
 
 
-    @property
+    '''@property
     def hour(self):
         return self.__hour
 
@@ -34,7 +36,7 @@ class Term:
 
     @duration.setter
     def duration(self, var):
-        self.__duration = var
+        self.__duration = var'''
 
     @property
     def day(self):
@@ -169,10 +171,10 @@ class Term:
         x = Term(other.hour, other.minute)
         x.duration = (end_hour - other.hour)*60 + end_min - other.minute
         return x
-        
+
     def difference(self, termin):
         return Diff(self, termin)
-        
+
 class Diff():
     def __init__(self, term1, term2):
         self.days = term1.day.difference(term2.day)

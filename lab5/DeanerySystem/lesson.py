@@ -4,6 +4,7 @@ from day import Day
 from timetable1 import Timetable1
 from timetable2 import Timetable2
 from b import Break
+from basic import BasicTerm
 
 
 def check_full_time(term: Term):
@@ -20,7 +21,7 @@ def check_full_time(term: Term):
 
 
 class Lesson():
-    def __init__(self, timetable, term: Term, name: str, teacherName: str, year: int, skipBreaks: bool = True):
+    def __init__(self, timetable, term: Term, name: str, teacherName: str, year: int, skipBreaks: bool = None):
 
         self.__term = term
         self.__name = name
@@ -114,7 +115,7 @@ class Lesson():
 
 
     def earlierTime(self):
-        if self.skipBreaks == True:
+        if self.skipBreaks == True and self.timetable == Timetable2:
 
             min = self.term.hour * 60 + self.term.minute
             new_hour = (min - self.term.duration - self.breakBefore) // 60
@@ -122,7 +123,7 @@ class Lesson():
 
             new_term = Term(new_hour, new_min, day = self.term.day)
 
-        else:
+        elif self.skipBreaks == False or self.timetable == Timetable1:
             min = self.term.hour * 60 + self.term.minute
             new_hour = (min - self.term.duration) // 60
             new_min = (min - self.term.duration) % 60

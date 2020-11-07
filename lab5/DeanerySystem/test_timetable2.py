@@ -2,6 +2,8 @@ import unittest
 from timetable1 import Timetable1
 from timetable2 import Timetable2
 from b import Break
+from basic import BasicTerm
+from basicTimetable import BasicTimetable
 from term import Term
 from day import Day
 from lesson import Lesson
@@ -13,7 +15,8 @@ lesson3 = Lesson(Timetable2, Term(12, 50, day = Day.WED), "Kryptografia", "Topa"
 lesson4 = Lesson(Timetable2, Term(9, 35, day = Day.TUE), "BAWiM", "Juszka", 2, False)
 
 table = Timetable2([Break(Term(9, 30, 5)), Break(Term(11, 5, 10)), Break(Term(12, 45, 5)), Break(Term(14, 20, 20)), Break(Term(16, 10, 5)), Break(Term(17, 45, 5))])
-table.lessons = [lesson1, lesson2, lesson3, lesson4]
+table.lessons = [lesson1, lesson2, lesson3]
+table.put(lesson4)
 
 class TestTimetable2(unittest.TestCase):
 
