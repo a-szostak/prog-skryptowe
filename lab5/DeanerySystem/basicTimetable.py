@@ -30,7 +30,7 @@ class BasicTimetable:
             elif action == "t+":
                 list_action.append(Action.TIME_LATER)
             else:
-                raise ValueError("Translation" + action + "is incorrect")
+                raise ValueError("Translation " + action + " is incorrect")
 
         return list_action
 

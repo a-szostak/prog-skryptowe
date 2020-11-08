@@ -13,10 +13,6 @@ class Timetable2(BasicTimetable):
         self.breaks = breaks
         self.lessons = []
 
-    '''def __init__(self):
-        self.breaks = [Break(Term(9, 30, 5)), Break(Term(11, 5, 10))]
-        self.lessons = []'''
-
 
 
     def can_be_transferred_to(self, term: Term, full_time: bool) -> bool:
