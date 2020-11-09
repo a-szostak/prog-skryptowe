@@ -11,7 +11,7 @@ class Timetable1(BasicTimetable):
     """ Class containing a set of operations to manage the timetable """
 
     def __init__(self):
-        self.lessons = []
+        self.lessons = {}
 
 ##########################################################
     def can_be_transferred_to(self, term: Term, full_time: bool) -> bool:
@@ -38,7 +38,7 @@ bool
 
         check = True
 
-        for lesson in self.lessons:
+        for lesson in self.lessons.values():
             if lesson.term.day == term.day:
                 lesson_start = lesson.term.hour * 60 + lesson.term.minute
                 lesson_end = lesson_start + lesson.term.duration
@@ -74,7 +74,7 @@ bool
 
         check = False
 
-        for lesson in self.lessons:
+        for lesson in self.lessons.values():
             if lesson.term.day == term.day:
                 lesson_start = lesson.term.hour * 60 + lesson.term.minute
                 lesson_end = lesson_start + lesson.term.duration
@@ -84,7 +84,7 @@ bool
                     break
         return check
 
-    
+
 
     def __str__(self):
         print(" " * 12, "*Poniedziałek*Wtorek     *Środa      *Czwartek    *Piątek      *Sobota    *Niedziela")
@@ -106,7 +106,7 @@ bool
             print(" "*12)
             wiersz = [" "*13, "*", " "*12 , "*" , " "*11 , "*" , " "*11 , "*" , " "*12 , "*" , " "*12 , "*" , " "*10 , "*"]
             #print("             *           *              *           *         *        *")
-            for lesson in self.lessons:
+            for lesson in self.lessons.values():
 
                 if lesson.term.hour == int(i):
                     index = 2 * lesson.term.day.value

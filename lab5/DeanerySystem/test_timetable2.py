@@ -15,7 +15,10 @@ lesson3 = Lesson(Timetable2, Term(12, 50, day = Day.WED), "Kryptografia", "Topa"
 lesson4 = Lesson(Timetable2, Term(9, 35, day = Day.TUE), "BAWiM", "Juszka", 2, False)
 
 table = Timetable2([Break(Term(9, 30, 5)), Break(Term(11, 5, 10)), Break(Term(12, 45, 5)), Break(Term(14, 20, 20)), Break(Term(16, 10, 5)), Break(Term(17, 45, 5))])
-table.lessons = [lesson1, lesson2, lesson3]
+#table.lessons = [lesson1, lesson2, lesson3]
+table.put(lesson1)
+table.put(lesson2)
+table.put(lesson3)
 table.put(lesson4)
 
 class TestTimetable2(unittest.TestCase):
@@ -27,10 +30,13 @@ class TestTimetable2(unittest.TestCase):
 
         self.assertEqual(lesson1.term.hour, 9)
         self.assertEqual(lesson1.term.minute, 35)
+
         self.assertEqual(lesson2.term.hour, 9)
         self.assertEqual(lesson2.term.minute, 30)
+
         self.assertEqual(lesson3.term.hour, 14)
         self.assertEqual(lesson3.term.minute, 40)
+
         self.assertEqual(lesson4.term.hour, 8)
         self.assertEqual(lesson4.term.minute, 5)
 

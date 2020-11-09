@@ -1,6 +1,6 @@
 from term import Term
 from day import Day
-from typing import List
+from typing import List, Dict
 from lesson2 import Lesson
 from b import Break
 from basic import BasicTerm
@@ -11,7 +11,7 @@ class Timetable2(BasicTimetable):
 
     def __init__(self, breaks: List[Break] = None):
         self.breaks = breaks
-        self.lessons = []
+        self.lessons = {}
 
 
 
@@ -24,7 +24,7 @@ class Timetable2(BasicTimetable):
 
         check = True
 
-        for lesson in self.lessons:
+        for lesson in self.lessons.values():
             if lesson.term.day == term.day:
                 lesson_start = lesson.term.hour * 60 + lesson.term.minute
                 lesson_end = lesson_start + lesson.term.duration
@@ -41,7 +41,7 @@ class Timetable2(BasicTimetable):
 
         check = False
 
-        for lesson in self.lessons:
+        for lesson in self.lessons.values():
             if lesson.term.day == term.day:
                 lesson_start = lesson.term.hour * 60 + lesson.term.minute
                 lesson_end = lesson_start + lesson.term.duration
@@ -75,7 +75,7 @@ class Timetable2(BasicTimetable):
 
 
     def att_setter(self):
-        for lesson in self.lessons:
+        for lesson in self.lessons.values():
             self.which_break(lesson)
 
 
@@ -109,7 +109,7 @@ class Timetable2(BasicTimetable):
             print(" "*12)
             wiersz = [" "*13, "*", " "*12 , "*" , " "*11 , "*" , " "*11 , "*" , " "*12 , "*" , " "*12 , "*" , " "*10 , "*"]
             #print("             *           *              *           *         *        *")
-            for lesson in self.lessons:
+            for lesson in self.lessons.values():
 
                 if lesson.term.hour == int(i):
                     index = 2 * lesson.term.day.value

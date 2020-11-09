@@ -12,7 +12,7 @@ class BasicTimetable:
         pass
 
     def get(self, term: Term) -> Lesson:
-        for lesson in self.lessons:
+        for lesson in self.lessons.values():
             if lesson.term == term:
                 return lesson
         return None
@@ -35,17 +35,18 @@ class BasicTimetable:
         return list_action
 
     def perform(self, actions: List[Action]):
+
         number = 0
         for action in actions:
             if action == Action.DAY_EARLIER:
-                self.lessons[number].earlierDay()
+                list(self.lessons.values())[number].earlierDay()
             elif action == Action.DAY_LATER:
-                self.lessons[number].laterDay()
+                list(self.lessons.values())[number].laterDay()
             elif action == Action.TIME_EARLIER:
-                self.lessons[number].earlierTime()
+                list(self.lessons.values())[number].earlierTime()
             elif action == Action.TIME_LATER:
-                self.lessons[number].laterTime()
-            number = (number + 1) % len(self.lessons)
+                list(self.lessons.values())[number].laterTime()
+            number = (number + 1) % len(list(self.lessons))
 
 
 
@@ -53,6 +54,6 @@ class BasicTimetable:
     def put(self, lesson: Lesson) -> bool:
 
         if self.can_be_transferred_to(lesson.term, lesson.full_time) == True:
-            self.lessons.append(lesson)
+            self.lessons.update({str(lesson.term) : lesson})
             return True
         return False
