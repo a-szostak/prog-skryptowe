@@ -1,4 +1,8 @@
 
+<<<<<<< HEAD
+=======
+import math
+>>>>>>> 44934bdd6d1d5746cd768dd1c750648d971f261d
 from day import Day
 
 class Term:
@@ -61,10 +65,21 @@ class Term:
             return True
         return False
 
+    def difference(self, termin):
+        return Diff(self, termin)
 
-class Diff(Term):
-    def __init__(self, days, hours, minutes, seconds):
-        pass
+
+class Diff():
+    def __init__(self, term1, term2):
+        self.days = term1.day.difference(term2.day)
+
+        min1 = term1.minute + term1.hour*60 + (term1.day.value - 1) * 24 *60
+        min2 = term2.minute + term2.hour*60 + (term2.day.value - 1) * 24 * 60
+        self.minutes = math.fabs(min1 - min2)
+
+        self.hours = self.minutes // 60
+
+        self.seconds = self.minutes * 60
 
 
 

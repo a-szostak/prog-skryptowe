@@ -1,18 +1,55 @@
 
-import re
+import math
 from day import Day
 
 class Term:
 
-    def __init__(self, hour, minute, duration= 90, day = None):
-        self.duration  = duration
-        self.minute = minute
-        self.hour = hour
-        self.day = day
+    def __init__(self, hour, minute, duration = 90, day = None):
+        self.__duration  = duration
+        self.__minute = minute
+        self.__hour = hour
+        self.__day = day
+
+
+
+    @property
+    def hour(self):
+        return self.__hour
+
+    @hour.setter
+    def hour(self, var):
+        self.__hour = var
+
+    @property
+    def minute(self):
+        return self.__minute
+
+    @minute.setter
+    def minute(self, var):
+        self.__minute = var
+
+    @property
+    def duration(self):
+        return self.__duration
+
+    @duration.setter
+    def duration(self, var):
+        self.__duration = var
+
+    @property
+    def day(self):
+        return self.__day
+
+    @day.setter
+    def day(self, var):
+        self.__day = var
+
+
 
     def __str__(self):
         napis = str(self.hour) + ":" + str(self.minute) + " [" + str(self.duration) + "]"
         return napis
+
 
     def earlierThan(self, termin):
         if self.day == None and termin.day == None:
@@ -132,6 +169,21 @@ class Term:
         x = Term(other.hour, other.minute)
         x.duration = (end_hour - other.hour)*60 + end_min - other.minute
         return x
+        
+    def difference(self, termin):
+        return Diff(self, termin)
+        
+class Diff():
+    def __init__(self, term1, term2):
+        self.days = term1.day.difference(term2.day)
+
+        min1 = term1.minute + term1.hour*60 + (term1.day.value - 1) * 24 *60
+        min2 = term2.minute + term2.hour*60 + (term2.day.value - 1) * 24 * 60
+        self.minutes = math.fabs(min1 - min2)
+
+        self.hours = self.minutes // 60
+
+        self.seconds = self.minutes * 60
 
 
 
