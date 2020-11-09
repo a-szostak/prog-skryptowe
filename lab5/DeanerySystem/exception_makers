@@ -1,0 +1,23 @@
+INCORRECT PARSING
+table = Timetable1()
+table.parse(["d-", "d+", "sth_else", "t-", "t+"])
+
+LESSON COLLISION
+lesson1 = Lesson(Timetable1, Term(12, 30, day = Day.MON), "Programowanie", "Polak", 2)
+lesson2 = Lesson(Timetable1, Term(12, 30, day = Day.MON), "SysOps", "Rzecki", 2)
+table = Timetable1()
+table.put(lesson1)
+table.put(lesson2)
+
+
+LESSON DOESN'T EXIST
+table = Timetable1()
+table.get(Term(12, 30, day = Day.MON))
+
+
+>>test
+lesson1 = Lesson(Timetable1, Term(11, 00, day = Day.MON), "Programowanie", "Polak", 2)
+table = Timetable1()
+table.put(lesson1)
+
+
