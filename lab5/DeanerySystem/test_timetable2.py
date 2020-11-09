@@ -23,6 +23,10 @@ table.put(lesson4)
 
 class TestTimetable2(unittest.TestCase):
 
+    def test_is_dict(self):
+        self.assertEqual(list(table.lessons)[0], "11:15 [90]")
+        self.assertEqual(list(table.lessons)[2], "12:50 [90]")
+
 
     def test_performance(self):
         actions = table.parse(["t-", "t+", "t+", "t-"])

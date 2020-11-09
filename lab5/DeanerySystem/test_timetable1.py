@@ -20,6 +20,10 @@ table.put(lesson3)
 
 class TestTimetable1(unittest.TestCase):
 
+    def test_is_dict(self):
+        self.assertEqual(list(table.lessons)[0], "12:15 [90]")
+        self.assertEqual(list(table.lessons)[1], "8:20 [90]")
+        self.assertEqual(list(table.lessons)[2], "17:20 [90]")
 
     def test_can_be(self):
         self.assertEqual(table.can_be_transferred_to(Term(15, 45, day = Day.THU), True), True)
