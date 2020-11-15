@@ -1,1 +1,7 @@
 python3 -c "import sys,re;keys=list(map(lambda word: len(word),re.sub('\n', ' ', sys.stdin.read()).split(' ')[:-1]));print(dict(zip(keys,list(map(lambda z: keys.count(z), list(dict.fromkeys(keys)))))))"
+
+
+qq ffaf
+1 1
+^D
+{1:2, 2:1, 4:1}
