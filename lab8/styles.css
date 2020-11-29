@@ -1,0 +1,29 @@
+#uczelnia{
+  color: white;
+}
+#dropdownMenuButton{
+  color: LightGray;
+}
+.col-auto{
+  color:white;
+}
+h5, p{
+  padding-left: 17px;
+}
+img{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.animated{
+  animation: sk 10s infinite;
+}
+
+@keyframes sk {
+  0% {transform: translateY(0);}
+  10% {transform: skew(20deg, 20deg);}
+  20% {transform: translateY(200px);}
+  40% {transform: skew(-35deg, -35deg);}
+  60% {transform: translateY(200px);}
+  80% {transform: skew(35deg, 35deg);}
+  100% {transform: translateY(0);}
+}
