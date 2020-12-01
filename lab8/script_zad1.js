@@ -15,7 +15,7 @@ button.onclick = function() {
     var txt = document.forms[0].elements['pole_tekstowe'].value;
     var num =  document.forms[0].elements['pole_liczbowe'].value;
 
-    document.getElementById('formElements').innerText = txt + "\nTyp: " + typeof(txt);
-    document.getElementById('formElements').innerText += "\n" + num + "\nTyp: " + typeof(txt);
+    document.getElementById('formElements').innerText = txt;
+    document.getElementById('formElements').innerText += "\n" + num;
 
   }

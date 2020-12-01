@@ -1,6 +1,7 @@
 "use strict";
 
 var sumaTotal = 0;
+main();
 
 var expect = chai.expect;
 
@@ -48,14 +49,14 @@ function suma(napis){
 }
 
 
-
-var napis = window.prompt("Wpisz coś");
-while(napis != null){
-	suma(napis);
-	console.log(cyfry(napis) + ' ' + litery(napis) + ' ' + sumaTotal);
-	napis = window.prompt("Wpisz coś");
+function main(){
+	var napis = window.prompt("Wpisz coś");
+	while(napis != null){
+		suma(napis);
+		console.log(cyfry(napis) + ' ' + litery(napis) + ' ' + sumaTotal);
+		napis = window.prompt("Wpisz coś");
+	}
 }
-
 
 describe('The sum() function', function() {
  it('Returns 4 for 2+2', function() {
