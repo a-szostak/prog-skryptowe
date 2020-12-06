@@ -1,4 +1,4 @@
-var worker = new Worker("js/calculate.js");
+var worker = new Worker("calculate.js");
 
 function doPointlessComputationsInWorker() {
 

@@ -1,7 +1,7 @@
 const iterations = 100;
 const multiplier = 1000000000;
 
-var worker = new Worker("js/calculate.js");
+var worker = new Worker("calculate.js");
 
 /**
  * Doing the pointless computations.
@@ -16,6 +16,8 @@ function doPointlessComputations() {
   var useWorkerButton = document.getElementById("use-worker");
   var useBlockingJsButton = document.getElementById("use-blocking-js");
   var useRequestAnimationFrame = document.getElementById("use-request-animation-frame");
+  var useSetInterval =  document.getElementById("use-si");
+  var useSetTimeout =  document.getElementById("use-st");
 
   if (useBlockingJsButton.checked) {
     doPointlessComputationsWithBlocking();
@@ -25,6 +27,12 @@ function doPointlessComputations() {
   }
   else if (useWorkerButton.checked) {
     doPointlessComputationsInWorker();
+  }
+  else if (useSetInterval.checked){
+    doPointlessComputationsWithSetInterval();
+  }
+  else if (useSetTimeout.checked){
+    doPointlessComputationsWithSetTimeot();
   }
 }
 
