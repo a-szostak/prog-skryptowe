@@ -25,7 +25,7 @@ function ustaw(){
     azure[i].style.fontSize = "20px";
   }
   for (var i=0; i<left.length; i++){
-    left[i].style.float = "left";
+    left[i].style.cssFloat = "left";
     left[i].style.marginLeft = "25px";
   }
   blockquote.style.fontFamily = '"Lucida Console", Courier, monospace';
@@ -39,7 +39,7 @@ function ustaw(){
   document.querySelector("aside h1").style.marginBottom = "-25px";
 
   aside.style.width = "30%";
-  aside.style.float = "right";
+  aside.style.cssFloat = "right";
   aside.style.marginRight = "25px";
   aside.style.paddingLeft = "15px";
   aside.style.paddingRight = "400px";
@@ -58,7 +58,7 @@ function ustaw(){
   nav.style.paddingRight = "15px";
   nav.style.paddingLeft = "17px";
 
-  form.style.float = "left";
+  form.style.cssFloat = "left";
   form.style.margin = "20px";
 
 }
