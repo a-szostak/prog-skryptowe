@@ -21,7 +21,7 @@ function decrement(){
 
 
 
-form.onchange = function(){
+form.addEventListener("input", function(){
    counter = form.value;
    //window.setInterval(decrement, 1000);
-}
+});

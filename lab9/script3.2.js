@@ -9,7 +9,6 @@ class MyCounter extends HTMLElement{
    connectedCallback(){
       this.count = this.licznik.value;
 
-
       setInterval(() => {
           this.render();
 
@@ -20,9 +19,9 @@ class MyCounter extends HTMLElement{
 
       }, 1000);
 
-      this.licznik.onchange = () => {
+      this.licznik.addEventListener("input", f => {
         this.count = licznik.value;
-      }
+      });
 
   }
   render(){
