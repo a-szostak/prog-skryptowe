@@ -13,23 +13,25 @@
 
       window.setInterval(writeDate, 1000);
 
-      function requestAJAX() {
+      function requestAJAX() {   
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = () => response(xhr);
       xhr.open('GET', '/submit', true);
-      xhr.send(null);
+      xhr.send(null); 
     }
 
     function response(xhr) {
       try {
         if (xhr.readyState == XMLHttpRequest.DONE) { 
           if (xhr.status == 200) {                  
-            var received_data = xhr.responseText; 
-            window.alert(received_data);          
-
+            //var received_data = xhr.responseText;
             // If the data you receive is an HTML or XML document, use the following code
-            // var xmlDoc = xhr.responseXML; //Receive the answer in the form of object 'XmlDocument', which can be accessed using DOM methods - see https://www.w3.org/TR/domcore/
-            // console.log(xmlDoc);
+             
+             var xmlDoc = xhr.responseXML;
+             document.getElementsById("remote").textContent = "eee";
+             
+             //Receive the answer in the form of object 'XmlDocument', which can be accessed using DOM methods - see https://www.w3.org/TR/domcore/
+            //console.log(xmlDoc);
           }
           else
             window.alert('There was a problem with this request.');
@@ -45,15 +47,16 @@
 
     </head>
     <body>
-        <p id='local'></p>
-        <br>
+        
+        
         <form>
           <input type="text" name="area" placeholder="area">
           <input type="text" name="location" placeholder="location">
           <input type="submit" value="Remote date" formaction="/submit" onclick="requestAJAX()">
-        </form>          
+        </form>
+        <br>
+        <p id='local'></p> 
+        <p id='remote'></p>         
     </body>
-
-    
 
     </html>
