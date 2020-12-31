@@ -1,0 +1,11 @@
+Naciśnij przycisk "Without using AJAX or Fetch API" i zobacz co wyświetla przeglądarka, a co serwer
+P:Hello World (Witaj Świecie)
+S:The server sent the 'Hello World (Witaj Świecie)' text to the browser
+
+Naciśnij przycisk "Using AJAX" i zaobserwuj to, co powyżej
+P:alert
+S:to samo co w 1 
+
+Naciśnij przycisk "Using Fetch API" i zaobserwuj to, co w pkt. 5
+P:alert [object Promise]
+S:to samo co w 1 i 2

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      Time
+    </title>
+    <script>
+
+      function writeDate(){
+      document.getElementById('local').textContent = "Local date and time: " + Date();
+      }
+
+      window.setInterval(writeDate, 1000);
+
+      function requestAJAX() {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = () => response(xhr);
+      xhr.open('GET', '/submit', true);
+      xhr.send(null);
+    }
+
+    function response(xhr) {
+      try {
+        if (xhr.readyState == XMLHttpRequest.DONE) { 
+          if (xhr.status == 200) {                  
+            var received_data = xhr.responseText; 
+            window.alert(received_data);          
+
+            // If the data you receive is an HTML or XML document, use the following code
+            // var xmlDoc = xhr.responseXML; //Receive the answer in the form of object 'XmlDocument', which can be accessed using DOM methods - see https://www.w3.org/TR/domcore/
+            // console.log(xmlDoc);
+          }
+          else
+            window.alert('There was a problem with this request.');
+        }
+      }
+      catch (e) {
+        window.alert('Exception caught: ' + e.description);
+      }
+    }
+
+  </script>
+   
+
+    </head>
+    <body>
+        <p id='local'></p>
+        <br>
+        <form>
+          <input type="text" name="area" placeholder="area">
+          <input type="text" name="location" placeholder="location">
+          <input type="submit" value="Remote date" formaction="/submit" onclick="requestAJAX()">
+        </form>          
+    </body>
+
+    
+
+    </html>
