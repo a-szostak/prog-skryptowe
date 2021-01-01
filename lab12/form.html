@@ -87,34 +87,19 @@
     function ajaxGET(){
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = () => response(xhr);
-      xhr.open('GET', '/submit', true);
+      xhr.open('GET', '/submit?imie=' + document.getElementById('imie').value, true);
       xhr.send();
     }
 
     function ajaxPOST(){
       var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = () => responsepost(xhr);
+      xhr.onreadystatechange = () => response(xhr);
       xhr.open('POST', '/postAjax', true);
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.send('imie='+document.getElementByName('imie').value);
+      xhr.send(document.getElementById('imie').value);
     }
 
-    function responsepost(xhr) {
-      try {
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-          if (xhr.status == 200) {
-            var received_data = xhr.responseText;
-            window.alert(received_data);
-          }
-          else
-            window.alert('There was a problem with this request.');
-        }
-      }
-      catch (e) {
-        window.alert('Exception caught: ' + e.description);
-      }
-    }
-
+    
 
 
     </script>
@@ -131,9 +116,9 @@
               onclick="requestFetchAPI()">
       </form>
       <form>
-        <input type="text" name="imie">
-        <input type="submit" value="AJAX (GET)" formaction="/submit" onclick="ajaxGET()">
-        <input type="submit" value="AJAX (POST)" formmethod="post" formaction="/postAjax" onclick="ajaxPOST()">
+        <input type="text" name="imie" id="imie">
+        <input type="button" value="AJAX (GET)" formaction="/submit" onclick="ajaxGET()">
+        <input type="button" value="AJAX (POST)" formmethod="post" formaction="/postAjax" onclick="ajaxPOST()">
         <input type="submit" value="Fetch API (GET)">
         <input type="submit" value="Fetch API (POST)">
 

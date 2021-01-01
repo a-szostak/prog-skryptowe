@@ -16,20 +16,22 @@
       function requestAJAX() {   
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = () => response(xhr);
-      xhr.open('GET', '/submit', true);
+      xhr.open('GET', '/submit?area='+ document.getElementById('area').value + "&location=" +document.getElementById('location').value , true);
       xhr.send(null); 
     }
 
     function response(xhr) {
       try {
-        if (xhr.readyState == XMLHttpRequest.DONE) { 
+        if (xhr.readyState == 4) { 
           if (xhr.status == 200) {                  
-            //var received_data = xhr.responseText;
+            var received_data = xhr.responseText;
+            document.getElementById('remote').textContent = received_data;
             // If the data you receive is an HTML or XML document, use the following code
+            //const http = require("http");
+             //var xmlDoc = xhr.responseXML;
              
-             var xmlDoc = xhr.responseXML;
-             document.getElementsById("remote").textContent = "eee";
-             
+                     
+                        
              //Receive the answer in the form of object 'XmlDocument', which can be accessed using DOM methods - see https://www.w3.org/TR/domcore/
             //console.log(xmlDoc);
           }
@@ -50,9 +52,9 @@
         
         
         <form>
-          <input type="text" name="area" placeholder="area">
-          <input type="text" name="location" placeholder="location">
-          <input type="submit" value="Remote date" formaction="/submit" onclick="requestAJAX()">
+          <input type="text" name="area" id="area" placeholder="area">
+          <input type="text" name="location" id="location" placeholder="location">
+          <input type="button" value="Remote date" formaction="/submit" onclick="setInterval(requestAJAX,1000)">
         </form>
         <br>
         <p id='local'></p> 

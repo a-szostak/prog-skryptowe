@@ -9,6 +9,9 @@ http.createServer(function (request, response) {
   var url_parts = url.parse(request.url, true);  // parsing (relative) URL
   console.log(url_parts.pathname)
 
+  
+  
+
   //Compare the relative URL
   switch (url_parts.pathname) {
 
@@ -45,10 +48,15 @@ http.createServer(function (request, response) {
 
       case '/postAjax':
       response.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });
-      response.write(request.body);
-      //console.log(request.body.imie);
-      //response.write(params);
-      response.end();
+      let body = [];
+      request.on('data', (chunk) => {
+        body.push(chunk);
+      }).on('end', () => {
+        body = Buffer.concat(body).toString();
+        response.write("Hello " + body);
+        response.end();
+        // at this point, `body` has the entire request body stored in it as a string
+      });
       break;
 
 
