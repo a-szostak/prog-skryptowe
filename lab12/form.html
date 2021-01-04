@@ -87,7 +87,7 @@
     function ajaxGET(){
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = () => response(xhr);
-      xhr.open('GET', '/submit?imie=' + document.getElementById('imie').value, true);
+      xhr.open('GET', '/submit', true);
       xhr.send();
     }
 
@@ -117,7 +117,7 @@
       </form>
       <form>
         <input type="text" name="imie" id="imie">
-        <input type="button" value="AJAX (GET)" formaction="/submit" onclick="ajaxGET()">
+        <input type="submit" value="AJAX (GET)" formaction="/submit" onclick="ajaxGET()">
         <input type="button" value="AJAX (POST)" formmethod="post" formaction="/postAjax" onclick="ajaxPOST()">
         <input type="submit" value="Fetch API (GET)">
         <input type="submit" value="Fetch API (POST)">
