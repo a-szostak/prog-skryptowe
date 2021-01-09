@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <title>
+      Form
+    </title>
+
+    </head>
+    <body>
+
+        <form>
+          <input type="text" name="id" id="id" placeholder="Record ID">
+          <input type="button" value="Get record" id="button" formaction="/submit">
+        </form>
+        <br>
+
+          <script>
+
+          const $button = $("#button");
+
+          $button.click(function (){
+
+            $.ajax({
+              url : "http://localhost:8080/submit?id=" + $("#id").val(),
+              dataType : "xml"
+              })
+              .done(function(response) {
+
+                const $xml = $(response);
+
+                var properties = ["identifier", "datestamp", "setSpec", "status"];
+
+                const $table = $("<table></table>");
+                $("body").append($table);
+
+                for (var i = 0; i < 4; i++){
+                  const $tr = $("<tr></tr>");
+                  $table.append($tr);
+                  const $td1 = $("<td>" + properties[i] +"</td>");
+                  $tr.append($td1);
+
+                  if (i != 3){
+                  const $td2 = $("<td>" + $xml.find(properties[i]).html() +"</td>");
+                  $tr.append($td2);
+                  }
+
+                  else{
+                    const $td2 = $("<td>" + $xml.find("header").attr("status") +"</td>");
+                    $tr.append($td2);
+                  }
+
+                  $("td").css("border-top", "1px solid lightGrey");
+                  $("td").css("padding", "5px");
+                }
+
+
+
+              })
+              .fail(function() {
+                  alert("Wystąpił błąd");
+              })
+            });
+
+
+          </script>
+    </body>
+
+    </html>
