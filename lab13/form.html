@@ -36,6 +36,7 @@
                 $("body").append($table);
 
                 for (var i = 0; i < 4; i++){
+                  
                   const $tr = $("<tr></tr>");
                   $table.append($tr);
                   const $td1 = $("<td>" + properties[i] +"</td>");
@@ -59,7 +60,7 @@
 
               })
               .fail(function() {
-                  alert("Wystąpił błąd");
+                  alert("Failed");
               })
             });
 

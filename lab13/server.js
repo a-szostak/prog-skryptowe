@@ -1,6 +1,5 @@
 const https = require("https");
 const http = require("http");
-
 var file = 'form.html';
 var fs = require("fs");
 var url = require("url");
@@ -29,16 +28,15 @@ switch (url_parts.pathname) {
     break;
 
     case '/submit':
-      var q = url_parts.query;
 
-      const page = "https://journals.agh.edu.pl/csci/oai?verb=GetRecord&metadataPrefix=oai_dc&identifier=" + q.id;
+      // example: oai:ojs.journals.agh.edu.pl:article/2901
 
-
+      const page = "https://journals.agh.edu.pl/csci/oai?verb=GetRecord&metadataPrefix=oai_dc&identifier=" + url_parts.query.id;
 
 
       https.get(page, res => {
           res.setEncoding("utf8");
-          let text = "";
+          var text = "";
           res.on("data", data => {
             text += data;
           });
@@ -48,8 +46,6 @@ switch (url_parts.pathname) {
 
           });
         });
-      //response.write("eee");
-
 
     break;
 
